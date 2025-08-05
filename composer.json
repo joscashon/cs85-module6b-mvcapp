@@ -1,0 +1,15 @@
+{
+    "name": "user/cs85-module6b-mvcapp",
+    "autoload": {
+        "psr-4": {
+            "User\\Cs85Module6bMvcapp\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jos Cashon",
+            "email": "joscashon@gmail.com"
+        }
+    ],
+    "require": {}
+}
