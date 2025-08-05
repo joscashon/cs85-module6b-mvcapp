@@ -15,7 +15,9 @@
         <th>Minutes</th>
         <th>Seconds</th>
         <th>Pace (min/mile)</th>
+        <th>Action</th>
     </tr>
+    <?php $i = 0; ?>
     <?php foreach ($run->runs as $r): ?>
     <tr>
         <td><?= htmlspecialchars($r['date']) ?></td>
@@ -23,8 +25,13 @@
         <td><?= htmlspecialchars($r['minutes']) ?></td>
         <td><?= htmlspecialchars($r['seconds']) ?></td>
         <td><?= htmlspecialchars($run->paceForRun($r)) ?></td>
+        <td>
+            <form method="post" style="display:inline;">
+                <button type="submit" name="delete" value="<?= $i ?>">Delete</button>
+            </form>
+        </td>
     </tr>
-    <?php endforeach; ?>
+    <?php $i++; endforeach; ?>
 </table>
 
 <h2>Statistics</h2>

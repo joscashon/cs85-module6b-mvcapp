@@ -8,8 +8,16 @@ class RunController {
         // Start with runs from session or empty array
         $runs = isset($_SESSION['runs']) ? $_SESSION['runs'] : [];
 
-        // Handle form submission
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Handle deletion
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+            $deleteIndex = intval($_POST['delete']);
+            if (isset($runs[$deleteIndex])) {
+                array_splice($runs, $deleteIndex, 1);
+                $_SESSION['runs'] = $runs;
+            }
+        }
+        // Handle form submission for adding a run
+        elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date = isset($_POST['date']) ? htmlspecialchars($_POST['date']) : date('Y-m-d');
             $miles = isset($_POST['miles']) ? floatval($_POST['miles']) : 0;
             $minutes = isset($_POST['minutes']) ? intval($_POST['minutes']) : 0;
