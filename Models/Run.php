@@ -1,0 +1,48 @@
+<?php
+namespace User\Cs85Module6bMvcapp\Models;
+
+class Run {
+    public $runs; // Array of runs, each with miles, minutes, seconds, date
+
+    public function __construct($runs) {
+        $this->runs = $runs;
+    }
+
+    // Calculate average pace (min/mile) across all runs
+    public function averagePace() {
+        $totalMiles = 0;
+        $totalMinutes = 0;
+        foreach ($this->runs as $run) {
+            $totalMiles += $run['miles'];
+            $totalMinutes += $run['minutes'] + $run['seconds'] / 60;
+        }
+        return $totalMiles > 0 ? round($totalMinutes / $totalMiles, 2) : 0;
+    }
+
+    // Calculate current streak (consecutive days up to today)
+    public function streak() {
+        if (empty($this->runs)) return 0;
+        $dates = array_map(function($run) { return $run['date']; }, $this->runs);
+        $dates = array_unique($dates);
+        $dates = array_map(function($d) { return new \DateTime($d); }, $dates);
+        usort($dates, function($a, $b) { return $b <=> $a; }); // Descending
+
+        $streak = 0;
+        $today = new \DateTime();
+        foreach ($dates as $date) {
+            if ($date->diff($today)->days === $streak && $date <= $today) {
+                $streak++;
+            } else {
+                break;
+            }
+        }
+        return $streak;
+    }
+
+    // Calculate pace (min/mile) for a single run
+    public function paceForRun($run) {
+        $miles = $run['miles'];
+        $minutes = $run['minutes'] + $run['seconds'] / 60;
+        return $miles > 0 ? round($minutes / $miles, 2) : 0;
+    }
+}
