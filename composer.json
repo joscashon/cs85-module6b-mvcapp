@@ -2,7 +2,7 @@
     "name": "user/cs85-module6b-mvcapp",
     "autoload": {
         "psr-4": {
-            "User\\Cs85Module6bMvcapp\\": "./"
+            "User\\Cs85Module6bMvcapp\\": "src/"
         }
     },
     "authors": [
