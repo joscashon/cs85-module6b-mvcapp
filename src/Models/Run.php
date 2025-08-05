@@ -59,4 +59,29 @@ class Run {
         }
         return round($totalMinutes / 60, 2);
     }
+
+    // Calculate streak ending at a specific date (YYYY-MM-DD)
+    public function streakAtDate($targetDate) {
+        if (empty($this->runs)) return 0;
+        // Collect unique dates up to and including $targetDate
+        $dates = array_map(function($run) { return $run['date']; }, $this->runs);
+        $dates = array_unique($dates);
+        $dates = array_filter($dates, function($d) use ($targetDate) {
+            return $d <= $targetDate;
+        });
+        if (empty($dates)) return 0;
+        $dates = array_map(function($d) { return new \DateTime($d); }, $dates);
+        usort($dates, function($a, $b) { return $b <=> $a; }); // Descending
+
+        $streak = 0;
+        $current = new \DateTime($targetDate);
+        foreach ($dates as $date) {
+            if ($date->diff($current)->days === $streak && $date <= $current) {
+                $streak++;
+            } else {
+                break;
+            }
+        }
+        return $streak;
+    }
 }

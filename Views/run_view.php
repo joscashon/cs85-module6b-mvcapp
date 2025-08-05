@@ -15,6 +15,7 @@
         <th>Minutes</th>
         <th>Seconds</th>
         <th>Pace (min/mile)</th>
+        <th>Streak</th>
         <th>Action</th>
     </tr>
     <?php $i = 0; ?>
@@ -25,6 +26,7 @@
         <td><?= htmlspecialchars($r['minutes']) ?></td>
         <td><?= htmlspecialchars($r['seconds']) ?></td>
         <td><?= htmlspecialchars($run->paceForRun($r)) ?></td>
+        <td><?= htmlspecialchars($run->streakAtDate($r['date'])) ?></td>
         <td>
             <form method="post" style="display:inline;">
                 <button type="submit" name="delete" value="<?= $i ?>">Delete</button>
