@@ -20,4 +20,6 @@
 
 <h2>Statistics</h2>
 <strong>Current Streak: </strong> <?= htmlspecialchars($run->streak()) ?> days<br>
+<strong>Total Runs: </strong> <?= htmlspecialchars($run->totalRuns()) ?><br>
+<strong>Total Time Running: </strong> <?= htmlspecialchars($run->totalHours()) ?> hours<br>
 <strong>Average Pace: </strong> <?= htmlspecialchars($run->averagePace()) ?> min/mile

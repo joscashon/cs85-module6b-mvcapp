@@ -45,4 +45,18 @@ class Run {
         $minutes = $run['minutes'] + $run['seconds'] / 60;
         return $miles > 0 ? round($minutes / $miles, 2) : 0;
     }
+
+    // Get the total number of runs
+    public function totalRuns() {
+        return count($this->runs);
+    }
+
+    // Get the total time running in hours
+    public function totalHours() {
+        $totalMinutes = 0;
+        foreach ($this->runs as $run) {
+            $totalMinutes += $run['minutes'] + $run['seconds'] / 60;
+        }
+        return round($totalMinutes / 60, 2);
+    }
 }
