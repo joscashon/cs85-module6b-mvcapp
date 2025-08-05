@@ -1,4 +1,13 @@
 <h1>Fitness Run Tracker</h1>
+<h2>Add a Run</h2>
+<form method="post">
+    <label>Date: <input type="date" name="date" required value="<?= date('Y-m-d') ?>"></label>
+    <label>Miles: <input type="number" name="miles" step="0.01" min="0" required></label>
+    <label>Minutes: <input type="number" name="minutes" min="0" required></label>
+    <label>Seconds: <input type="number" name="seconds" min="0" max="59" required></label>
+    <button type="submit">Add Run</button>
+</form>
+<h2>Run History</h2>
 <table border="1" cellpadding="5">
     <tr>
         <th>Date</th>
